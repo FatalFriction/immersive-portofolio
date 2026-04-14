@@ -21,9 +21,9 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DNA Portfolio Theme Guide",
+  title: "Michael Florentio - Portfolio",
   description:
-    "A streetwear × anime × sneaker culture portfolio theme guide with typography, palette, and a live mockup.",
+    "A streetwear × anime × sneaker culture portfolio theme by Michael Florentio.",
 };
 
 export default function RootLayout({

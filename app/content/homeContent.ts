@@ -76,7 +76,7 @@ export const homeContent: HomeContent = {
       description: "Achieved 40-60% speed gains through Next.js SSR, code splitting, and advanced caching on production platforms serving 50-80+ daily users.",
       year: "2026",
       stack: ["Next.js", "React", "Tailwind CSS", "Performance Tuning"],
-      image: "/reference/dragon-bodies1.png",
+      image: "/reference/dragon-bodies2.png",
     },
     {
       title: "Booking & Session Platform",
@@ -160,7 +160,7 @@ export const homeContent: HomeContent = {
       description:
         "Container-first release pipelines, AWS-ready runtime setup, and deploy flows tuned for low friction.",
       stack: ["PostgreSQL", "Docker", "AWS", "Cloud Infrastructure"],
-      image: "/reference/bc807e32-932f-4f06-b888-1474a2c8a0e5.png",
+      image: "/reference/5c5f131b-4abd-4c01-af78-99bfba287aab.png",
       ctaLabel: "View Project",
       href: "#about",
       isFeatured: false,
@@ -174,7 +174,7 @@ export const homeContent: HomeContent = {
       description:
         "Production systems shaped around latency wins, route hydration discipline, and smoother user journeys.",
       stack: ["Next.js", "Caching", "SSR", "Optimization"],
-      image: "/reference/dragon-bodies.png",
+      image: "/reference/dragon-bodies2.png",
       ctaLabel: "View Project",
       href: "#featured",
       isFeatured: false,

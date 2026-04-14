@@ -1,4 +1,4 @@
-import { BountyGridItem, BountyPosterItem } from "../components/bountyGridTypes";
+import { BountyGridItem, BountyPosterItem } from "../components/bounty/types";
 
 export interface FeaturedProjectItem {
   title: string;
