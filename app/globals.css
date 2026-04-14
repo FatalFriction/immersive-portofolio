@@ -11,6 +11,7 @@
   --dna-surface: #111113;
   --dna-border: #1b1b1d;
   --dna-card-primary: #3f3640;
+  --dna-teal: #1dbfb0;
   --font-sans: var(--font-noto-jp, ui-sans-serif, system-ui, sans-serif);
   --font-display: var(--font-bebas, ui-sans-serif, system-ui, sans-serif);
   --font-mono: var(--font-space-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
@@ -18,8 +19,11 @@
 
 html {
   min-height: 100%;
-  background: radial-gradient(circle at top, rgba(255,92,73,0.12), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(163,143,232,0.12), transparent 25%),
+  background: 
+    radial-gradient(circle at 8% 12%, rgba(255,92,73,0.14) 0%, transparent 28%),
+    radial-gradient(circle at 92% 15%, rgba(163,143,232,0.12) 0%, transparent 22%),
+    radial-gradient(circle at 50% 92%, rgba(254,178,58,0.08) 0%, transparent 24%),
+    radial-gradient(circle at 15% 85%, rgba(255,136,114,0.08) 0%, transparent 20%),
     var(--dna-night);
 }
 
@@ -61,6 +65,69 @@ body {
 
 .dna-border {
   border-color: var(--dna-border);
+}
+
+.dna-glow-primary {
+  box-shadow: 0 0 60px rgba(255,92,73,0.35), 0 0 120px rgba(255,92,73,0.15);
+}
+
+.dna-glow-label {
+  box-shadow: 0 0 50px rgba(254,178,58,0.3), 0 0 100px rgba(254,178,58,0.12);
+}
+
+.dna-glow-accent {
+  box-shadow: 0 0 50px rgba(255,136,114,0.3), 0 0 100px rgba(255,136,114,0.12);
+}
+
+.dna-glow-sub {
+  box-shadow: 0 0 50px rgba(163,143,232,0.3), 0 0 100px rgba(163,143,232,0.12);
+}
+
+.dna-glow-teal {
+  box-shadow: 0 0 50px rgba(29,191,176,0.3), 0 0 100px rgba(29,191,176,0.12);
+}
+
+.text-glow-primary {
+  text-shadow: 0 0 30px rgba(255,92,73,0.6), 0 0 60px rgba(255,92,73,0.3);
+}
+
+.text-glow-label {
+  text-shadow: 0 0 30px rgba(254,178,58,0.6), 0 0 60px rgba(254,178,58,0.3);
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 30px rgba(255,136,114,0.6), 0 0 60px rgba(255,136,114,0.3);
+}
+
+.text-glow-sub {
+  text-shadow: 0 0 30px rgba(163,143,232,0.6), 0 0 60px rgba(163,143,232,0.3);
+}
+
+@keyframes pulse-glow-primary {
+  0%, 100% { box-shadow: 0 0 30px rgba(255,92,73,0.4), 0 0 60px rgba(255,92,73,0.2); }
+  50% { box-shadow: 0 0 50px rgba(255,92,73,0.6), 0 0 100px rgba(255,92,73,0.3); }
+}
+
+@keyframes pulse-glow-label {
+  0%, 100% { box-shadow: 0 0 30px rgba(254,178,58,0.4), 0 0 60px rgba(254,178,58,0.2); }
+  50% { box-shadow: 0 0 50px rgba(254,178,58,0.6), 0 0 100px rgba(254,178,58,0.3); }
+}
+
+@keyframes float-glow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-pulse-glow-primary {
+  animation: pulse-glow-primary 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow-label {
+  animation: pulse-glow-label 3s ease-in-out infinite;
+}
+
+.animate-float-glow {
+  animation: float-glow 4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

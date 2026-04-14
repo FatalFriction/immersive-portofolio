@@ -18,3 +18,6 @@ export const asymmetricOverlayClipPath =
 
 export const asymmetricButtonClipPath =
   "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))";
+
+  export const asymmetricRectClipPath =
+  "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 calc(100% - 8px))";
