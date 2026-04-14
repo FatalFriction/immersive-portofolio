@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --dna-primary: #ff5c49;
+  --dna-label: #feb23a;
+  --dna-accent: #ff8872;
+  --dna-sub: #a38fe8;
+  --dna-night: #1b1b1d;
+  --dna-line: #1b1b1d;
+  --dna-surface: #111113;
+  --dna-border: #1b1b1d;
+  --dna-card-primary: #3f3640;
+  --font-sans: var(--font-noto-jp, ui-sans-serif, system-ui, sans-serif);
+  --font-display: var(--font-bebas, ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-space-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+html {
+  min-height: 100%;
+  background: radial-gradient(circle at top, rgba(255,92,73,0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(163,143,232,0.12), transparent 25%),
+    var(--dna-night);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: #f3f4f6;
+  background: transparent;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+::selection {
+  background: rgba(255,92,73,0.25);
+  color: white;
+}
+
+.dna-display {
+  font-family: var(--font-display);
+}
+
+.dna-mono {
+  font-family: var(--font-mono);
+}
+
+.dna-poster {
+  background: linear-gradient(180deg, rgba(255,92,73,0.14), rgba(26,26,26,0.92));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+}
+
+.dna-bg {
+  background: var(--dna-night);
+}
+
+.dna-surface {
+  background: var(--dna-surface);
+}
+
+.dna-border {
+  border-color: var(--dna-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
