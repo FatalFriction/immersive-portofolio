@@ -70,7 +70,7 @@ export const BurnMaterial = shaderMaterial(
     vec2 uv = vUv;
     vec2 texUv = rotateUV(vUv, uRotation);
 
-    float burnLine = uv.y - uProgress - 0.35;
+    float burnLine = uv.y - uProgress - 0.25;
 
     float n = fbm(uv * 10.0);
     float texNoise = texture2D(uTexture, texUv * 2.5).r;

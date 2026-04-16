@@ -37,7 +37,7 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${notoSansJP.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col z-10">
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

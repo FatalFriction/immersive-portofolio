@@ -14,7 +14,6 @@ export const homeContent: HomeContent = {
         wash: "rgba(255,111,84,0.22)",
         ink: "#ffd6c8",
       },
-      featured: false,
     },
     {
       title: "Performance Optimization",
@@ -27,7 +26,6 @@ export const homeContent: HomeContent = {
         wash: "rgba(255,179,71,0.2)",
         ink: "#fff1c9",
       },
-      featured: true,
     },
     {
       title: "CI/CD Infrastructure",
@@ -40,7 +38,6 @@ export const homeContent: HomeContent = {
         wash: "rgba(40,215,229,0.18)",
         ink: "#d6fbff",
       },
-      featured: false,
     },
     {
       title: "Microservices API",
@@ -53,7 +50,6 @@ export const homeContent: HomeContent = {
         wash: "rgba(176,131,255,0.18)",
         ink: "#efe4ff",
       },
-      featured: false,
     },
     {
       title: "Full-Stack Platforms",
@@ -66,7 +62,6 @@ export const homeContent: HomeContent = {
         wash: "rgba(255,111,163,0.18)",
         ink: "#ffd9e8",
       },
-      featured: false,
     },
   ],
   featuredProjects: [

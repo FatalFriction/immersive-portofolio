@@ -3,13 +3,14 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { HeroPreviewCard } from "@/app/lib/types/card";
 import { useTexture } from "@react-three/drei";
+import { HeroPreviewCard } from "@/app/content/homeTypes";
 
 type Props = {
   item: HeroPreviewCard;
   index: number;
   cardRefs: React.RefObject<(HTMLElement | null)[]>;
+  rectCache: React.RefObject<(DOMRect | null)[]>;
 };
 
 type BurnMaterialType = THREE.ShaderMaterial & {
@@ -19,7 +20,7 @@ type BurnMaterialType = THREE.ShaderMaterial & {
   };
 };
 
-export default function BurnCard({ item, index, cardRefs }: Props) {
+export default function BurnCard({ item, index, cardRefs, rectCache }: Props) {
   const texture = useTexture("/reference/oldnews.jpg");
 
   const meshRef = useRef<THREE.Mesh>(null);
@@ -30,13 +31,12 @@ export default function BurnCard({ item, index, cardRefs }: Props) {
 
   const glow = new THREE.Color(item.palette.glow);
 
+
   useFrame(({ clock }) => {
     if (!meshRef.current || !matRef.current) return;
 
-    const el = cardRefs.current[index];
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
+    const rect = rectCache.current[index];
+    if (!rect) return;
 
     // --- POSITION
     const centerX = rect.left + rect.width / 2;
@@ -60,12 +60,12 @@ export default function BurnCard({ item, index, cardRefs }: Props) {
     // --- SCROLL BURN
     const viewportHeight = window.innerHeight;
 
-    const start = viewportHeight ;
+    const start = viewportHeight;
     const end = viewportHeight * 0.2;
 
     const progress = (start - rect.top) / (start - end);
     const clamped = Math.max(0, Math.min(1, progress));
-    
+
     // stagger
     const delay = 0.5;
     let finalProgress = (clamped - delay) / (1.0 - delay);

@@ -22,7 +22,6 @@ export interface HeroPreviewCard {
   stack: string[];
   serial: string;
   palette: PreviewCardPalette;
-  featured: boolean;
 }
 
 export interface FooterLink {

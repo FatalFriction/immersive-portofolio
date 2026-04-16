@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { homeContent } from "../../content/homeContent";
 import { HeroPreviewCard } from "../../content/homeTypes";
@@ -37,6 +37,7 @@ function getHoverResetWashOpacity(featured: boolean): number {
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Apply GSAP animations to the hero section
   useHeroPreviewAnimations(sectionRef);
@@ -52,6 +53,8 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden px-4 pb-8 pt-20 sm:px-6 sm:pb-10 sm:pt-24 lg:px-10"
     >
+      <BurnGridCanvas items={heroPreviewCards} cardRefs={cardRefs} />
+
       {/* Navigation bar */}
       <HeroNavbar />
 
@@ -64,7 +67,7 @@ export default function HeroSection() {
             filter: 'brightness(0.75) saturate(0.9)',
           }} 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1c]/85 via-[#1a1a1c]/60 to-[#1a1a1c]/95" />
+        <div className="absolute inset-0 bg-linear-to-b from-[#1a1a1c]/85 via-[#1a1a1c]/60 to-[#1a1a1c]/95" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,92,73,0.08),transparent_40%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(163,143,232,0.06),transparent_35%)]" />
       </div>
@@ -182,29 +185,21 @@ export default function HeroSection() {
           </div>
 
           {/* Preview cards grid */}
-          <div className="relative">
-
-          <div className="fixed inset-0 z-10 pointer-events-none">
-              <BurnGridCanvas
-                items={heroPreviewCards}
-                cardRefs={cardRefs}
-              />
-            </div>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5 w-full">
+          <div className="relative w-full">
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+              
               {heroPreviewCards.map((card: HeroPreviewCard, index: number) => (
                 <article
                   key={card.title}
-                  data-featured={card.featured ? "true" : "false"}
                   ref={(el) => registerCardRef(index, el)}
-                  className={`preview-card group relative overflow-hidden border bg-[#121317] ${card.featured
-                      ? "lg:col-span-1 shadow-[0_35px_120px_rgba(255,163,71,0.22)]"
-                      : "shadow-[0_28px_80px_rgba(0,0,0,0.34)]"
-                    }`}
+                  className={`preview-card group relative overflow-hidden border bg-[#121317]`}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                   style={{
                     borderColor: `${card.palette.edge}55`,
                     backgroundImage: `linear-gradient(180deg, rgba(255,255,255,0.06), rgba(10,10,12,0.94)), linear-gradient(135deg, ${card.palette.wash}, rgba(8,8,10,0.1) 40%, rgba(8,8,10,0.92) 100%)`,
                     clipPath: asymmetricPosterClipPath,
-                    willChange: "transform, opacity",
+                    willChange: "transform-gpu transition",
                   }}
                 >
                   {/* Paper fiber texture for editorial depth */}
@@ -213,10 +208,10 @@ export default function HeroSection() {
                   {/* Glow effect */}
                   <div
                     data-preview-glow=""
-                    className="pointer-events-none absolute -right-12 top-[-3rem] h-40 w-40 rounded-full blur-3xl"
+                    className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl"
                     style={{
                       backgroundColor: card.palette.glow,
-                      opacity: getHoverResetOpacity(card.featured),
+                      opacity: getHoverResetOpacity(hoveredIndex === index),
                     }}
                   />
                   
@@ -225,7 +220,7 @@ export default function HeroSection() {
                     data-preview-wash=""
                     className="absolute inset-0"
                     style={{
-                      opacity: getHoverResetWashOpacity(card.featured),
+                      opacity: getHoverResetWashOpacity(hoveredIndex === index),
                       background: `radial-gradient(circle at 18% 16%, ${card.palette.wash}, transparent 28%), linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.18) 58%, rgba(0,0,0,0.8) 100%)`,
                     }}
                   />
@@ -235,10 +230,7 @@ export default function HeroSection() {
                   <div className="absolute inset-x-0 bottom-0 h-36 bg-[linear-gradient(180deg,transparent,rgba(4,4,6,0.92))]" />
 
                   {/* Content area */}
-                  <div
-                    className={`relative z-10 flex h-[30rem] flex-col justify-between p-6 lg:h-[38rem] lg:p-7 ${index % 2 === 0 ? "lg:pt-10" : "lg:pt-6"
-                      }`}
-                  >
+                  <div className={`preview-card-inner relative z-10 flex h-120 flex-col justify-between p-6 lg:h-152 lg:p-7 ${index % 2 === 0 ? "lg:pt-10" : "lg:pt-6"}`}>
                     <div className="space-y-5">
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2">
@@ -246,7 +238,7 @@ export default function HeroSection() {
                             className="dna-mono text-[0.58rem] uppercase tracking-[0.34em]"
                             style={{ color: card.palette.ink }}
                           >
-                            {card.featured ? "Lead Story" : "System File"}
+                            {hoveredIndex === index ? "Lead Story" : "System File"}
                           </p>
                           <p className="dna-mono text-[0.58rem] uppercase tracking-[0.32em] text-white/42">
                             Case {card.serial}
@@ -260,7 +252,7 @@ export default function HeroSection() {
                         </span>
                       </div>
 
-                      <div className="max-w-[10rem] space-y-3">
+                      <div className="max-w-40 space-y-3">
                         <h3 className="dna-display text-[2.2rem] uppercase leading-[0.88] tracking-[0.03em] text-white">
                           {card.title}
                         </h3>
