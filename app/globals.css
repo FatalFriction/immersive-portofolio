@@ -15,6 +15,232 @@
   --font-sans: var(--font-noto-jp, ui-sans-serif, system-ui, sans-serif);
   --font-display: var(--font-bebas, ui-sans-serif, system-ui, sans-serif);
   --font-mono: var(--font-space-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+
+  /* Editorial spacing scale (4px/8px grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Editorial type scale */
+  --text-hero: clamp(3.5rem, 8vw, 10.5rem);
+  --text-h1: clamp(2.5rem, 5vw, 4rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.75rem;
+  --text-mono-xs: 0.58rem;
+  --text-mono-sm: 0.65rem;
+  --text-mono-md: 0.75rem;
+
+  /* Editorial image aspect ratios */
+  --aspect-editorial: 3/4;
+  --aspect-wide: 16/9;
+  --aspect-square: 1/1;
+}
+
+/* ========== GLOBAL TEXTURE SYSTEM ========== */
+
+/* Film grain overlay - applied to entire site */
+.texture-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* Halftone dot pattern for section backgrounds */
+.texture-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='0.8' fill='rgba(255,255,255,0.5)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  mix-blend-mode: overlay;
+}
+
+/* Fine halftone for subtle depth */
+.texture-fine-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='2' cy='2' r='0.4' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 4px 4px;
+  mix-blend-mode: overlay;
+}
+
+/* Paper fiber texture for cards and panels */
+.texture-paper-fiber {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='2'%3E%3Cline x1='0' y1='1' x2='200' y2='1' stroke='rgba(255,255,255,0.15)' stroke-width='0.5'/%3E%3Cline x1='20' y1='0.5' x2='80' y2='0.5' stroke='rgba(255,255,255,0.1)' stroke-width='0.3'/%3E%3Cline x1='120' y1='1.5' x2='170' y2='1.5' stroke='rgba(255,255,255,0.08)' stroke-width='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 200px 2px;
+  mix-blend-mode: overlay;
+}
+
+/* Micro noise for additional depth */
+.texture-micro-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='microNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23microNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  mix-blend-mode: overlay;
+}
+
+/* Diagonal lines for editorial accent */
+.texture-diagonal-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cline x1='0' y1='12' x2='12' y2='0' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 12px 12px;
+  mix-blend-mode: overlay;
+}
+
+/* Subtle paper grain texture for editorial components */
+.texture-paper-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='noise' lighting-color='rgba(255,255,255,0.3)' surfaceScale='1'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  mix-blend-mode: soft-light;
+}
+
+/* Scratch glass effect variations */
+.scratch-glass-1 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M0 6 L6 0' stroke='rgba(255,255,255,0.15)' stroke-width='0.5' fill='none'/%3E%3Cpath d='M3 6 L6 3' stroke='rgba(255,255,255,0.1)' stroke-width='0.4' fill='none'/%3E%3Cpath d='M-1 5 L5 -1' stroke='rgba(255,255,255,0.08)' stroke-width='0.3' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 6px 6px;
+  mix-blend-mode: soft-light;
+}
+
+.scratch-glass-2 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cline x1='0' y1='20' x2='100' y2='20' stroke='rgba(255,255,255,0.08)' stroke-width='0.4'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3Cline x1='5' y1='80' x2='95' y2='80' stroke='rgba(255,255,255,0.07)' stroke-width='0.3'/%3E%3Cline x1='0' y1='35' x2='100' y2='35' stroke='rgba(255,255,255,0.06)' stroke-width='0.2'/%3E%3Cline x1='20' y1='65' x2='80' y2='65' stroke='rgba(255,255,255,0.05)' stroke-width='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 100px 100px;
+  mix-blend-mode: soft-light;
+}
+
+.scratch-glass-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 0 L8 8' stroke='rgba(255,255,255,0.08)' stroke-width='0.4' fill='none'/%3E%3Cpath d='M4 0 L8 4' stroke='rgba(255,255,255,0.06)' stroke-width='0.3' fill='none'/%3E%3Cpath d='M0 4 L4 8' stroke='rgba(255,255,255,0.07)' stroke-width='0.35' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  mix-blend-mode: soft-light;
+}
+
+/* ========== ANIMATION UTILITIES ========== */
+
+/* Pulse animation for interactive elements */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Float animation for subtle movement */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Glow effects for interactive elements */
+.dna-glow-primary {
+  box-shadow: 0 0 15px rgba(255, 92, 73, 0.5);
+}
+
+.dna-glow-label {
+  box-shadow: 0 0 15px rgba(254, 178, 58, 0.5);
+}
+
+.dna-glow-accent {
+  box-shadow: 0 0 15px rgba(255, 136, 114, 0.5);
+}
+
+.dna-glow-sub {
+  box-shadow: 0 0 15px rgba(163, 143, 232, 0.5);
+}
+
+/* Text glow utilities */
+.text-glow-primary {
+  text-shadow: 0 0 5px rgba(255, 92, 73, 0.7);
+}
+
+.text-glow-label {
+  text-shadow: 0 0 5px rgba(254, 178, 58, 0.7);
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 5px rgba(255, 136, 114, 0.7);
+}
+
+.text-glow-sub {
+  text-shadow: 0 0 5px rgba(163, 143, 232, 0.7);
+}
+
+/* Smooth fade in animation */
+.fade-in {
+  animation: fadeIn 0.6s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Smooth slide up animation */
+.slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 html {
@@ -130,6 +356,32 @@ body {
   animation: float-glow 4s ease-in-out infinite;
 }
 
+/* Editorial utility classes */
+.editorial-leading {
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+}
+
+.editorial-tracking-wide {
+  letter-spacing: 0.35em;
+}
+
+.editorial-tracking-mono {
+  letter-spacing: 0.32em;
+}
+
+.aspect-editorial {
+  aspect-ratio: var(--aspect-editorial);
+}
+
+.aspect-wide {
+  aspect-ratio: var(--aspect-wide);
+}
+
+.aspect-square-editorial {
+  aspect-ratio: var(--aspect-square);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -137,4 +389,125 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ========== GLOBAL TEXTURE SYSTEM ========== */
+
+/* Film grain overlay - applied to entire site */
+.texture-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* Halftone dot pattern for section backgrounds */
+.texture-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='0.8' fill='rgba(255,255,255,0.5)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  mix-blend-mode: overlay;
+}
+
+/* Fine halftone for subtle depth */
+.texture-fine-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='2' cy='2' r='0.4' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 4px 4px;
+  mix-blend-mode: overlay;
+}
+
+/* Paper fiber texture for cards and panels */
+.texture-paper-fiber {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='2'%3E%3Cline x1='0' y1='1' x2='200' y2='1' stroke='rgba(255,255,255,0.15)' stroke-width='0.5'/%3E%3Cline x1='20' y1='0.5' x2='80' y2='0.5' stroke='rgba(255,255,255,0.1)' stroke-width='0.3'/%3E%3Cline x1='120' y1='1.5' x2='170' y2='1.5' stroke='rgba(255,255,255,0.08)' stroke-width='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 200px 2px;
+  mix-blend-mode: overlay;
+}
+
+/* Micro noise for additional depth */
+.texture-micro-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='microNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23microNoise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  mix-blend-mode: overlay;
+}
+
+/* Diagonal lines for editorial accent */
+.texture-diagonal-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cline x1='0' y1='12' x2='12' y2='0' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 12px 12px;
+  mix-blend-mode: overlay;
+}
+
+/* Subtle paper grain texture for editorial components */
+.texture-paper-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeDiffuseLighting in='noise' lighting-color='rgba(255,255,255,0.3)' surfaceScale='1'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  mix-blend-mode: soft-light;
+}
+
+/* Scratch glass effect variations */
+.scratch-glass-1 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M0 6 L6 0' stroke='rgba(255,255,255,0.15)' stroke-width='0.5' fill='none'/%3E%3Cpath d='M3 6 L6 3' stroke='rgba(255,255,255,0.1)' stroke-width='0.4' fill='none'/%3E%3Cpath d='M-1 5 L5 -1' stroke='rgba(255,255,255,0.08)' stroke-width='0.3' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 6px 6px;
+  mix-blend-mode: soft-light;
+}
+
+.scratch-glass-2 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cline x1='0' y1='20' x2='100' y2='20' stroke='rgba(255,255,255,0.08)' stroke-width='0.4'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='rgba(255,255,255,0.1)' stroke-width='0.5'/%3E%3Cline x1='5' y1='80' x2='95' y2='80' stroke='rgba(255,255,255,0.07)' stroke-width='0.3'/%3E%3Cline x1='0' y1='35' x2='100' y2='35' stroke='rgba(255,255,255,0.06)' stroke-width='0.2'/%3E%3Cline x1='20' y1='65' x2='80' y2='65' stroke='rgba(255,255,255,0.05)' stroke-width='0.25'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 100px 100px;
+  mix-blend-mode: soft-light;
+}
+
+.scratch-glass-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0 0 L8 8' stroke='rgba(255,255,255,0.08)' stroke-width='0.4' fill='none'/%3E%3Cpath d='M4 0 L8 4' stroke='rgba(255,255,255,0.06)' stroke-width='0.3' fill='none'/%3E%3Cpath d='M0 4 L4 8' stroke='rgba(255,255,255,0.07)' stroke-width='0.35' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  mix-blend-mode: soft-light;
 }

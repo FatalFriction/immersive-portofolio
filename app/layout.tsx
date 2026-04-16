@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Noto_Sans_JP, Space_Mono } from "next/font/google";
 import "./globals.css";
+import SmoothScrollProvider from "./providers/SmoothScroll";
 
 const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
@@ -36,7 +37,11 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${notoSansJP.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
+      </body>
     </html>
   );
 }

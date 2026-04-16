@@ -49,6 +49,9 @@ const BountyCard = forwardRef<HTMLButtonElement, BountyCardProps>(function Bount
       aria-pressed={isFocused}
       aria-label={`${item.title} project card`}
     >
+      {/* Micro noise texture for depth */}
+      <div className="pointer-events-none absolute inset-0 texture-micro-noise" />
+
       <div
         data-bounty-visual=""
         className="absolute inset-0"

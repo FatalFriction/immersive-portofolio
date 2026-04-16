@@ -13,7 +13,7 @@ interface HeroProjectProps {
 
 export default function HeroProject({ project }: HeroProjectProps) {
     return (
-        <section className="relative mx-auto mt-10 pb-20 bg-(--dna-night)">
+        <section className="relative mx-auto mt-10 bg-(--dna-night)">
 
             <div className="relative flex items-center w-480 h-185 justify-center bg-transparent">
                 <Image
@@ -32,6 +32,7 @@ export default function HeroProject({ project }: HeroProjectProps) {
                 <div className=" px-4 sm:px-6 lg:px-10 pb-10 relative grid gap-10 border-t border-white/15 pt-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
                     <div className="pointer-events-none absolute inset-0 opacity-[0.1] bg-[radial-gradient(circle_at_12%_18%,rgba(255,255,255,0.22)_1px,transparent_1px)] bg-size-[5px_5px]" />
                     <div className="pointer-events-none absolute inset-0 opacity-[0.08] bg-[linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.14)_1px,transparent_1px)] bg-size-[4px_4px]" />
+                    <div className="pointer-events-none absolute inset-0 texture-paper-grain" />
 
                     <div className="space-y-10">
                         <div className="flex items-center gap-4">
